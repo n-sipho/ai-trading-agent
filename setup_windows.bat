@@ -14,6 +14,12 @@ REM Install dependencies from requirements.txt
 echo Installing requirements...
 pip install -r requirements.txt
 
+REM Create .env file from .env-example if it doesn't exist
+if not exist .env (
+    echo Creating .env file from .env-example...
+    copy .env-example .env
+)
+
 echo.
 echo Setup complete!
 echo To run your bot, use: python hello_world.py
