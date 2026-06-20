@@ -1,1 +1,2 @@
 pydantic-ai
+pydantic-ai-slim[duckduckgo]
