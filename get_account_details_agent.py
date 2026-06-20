@@ -1,10 +1,12 @@
 import asyncio
 # from datetime import datetime
-
+from dotenv import load_dotenv
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from pydantic_ai import Agent
 from pydantic_ai.models.google import GoogleModel
+
+load_dotenv()
 
 # Initialize the Pydantic AI agent
 model = GoogleModel(
