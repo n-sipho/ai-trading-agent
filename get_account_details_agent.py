@@ -14,7 +14,7 @@ model = GoogleModel(
 
 # Connect to the MT5 MCP server using the stdio transport
 mcp_transport = StdioTransport(command="uvx", args=["--from", "mcp-metatrader5-server", "mt5mcp"])
-mcp_toolset = MCPToolset(mcp_transport)
+mcp_toolset = MCPToolset(mcp_transport, init_timeout=60)
 
 agent = Agent(
     model,
