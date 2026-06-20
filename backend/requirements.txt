@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+websockets
+pydantic-ai-slim[google]
+fastmcp
+python-dotenv
+pandas
+numpy

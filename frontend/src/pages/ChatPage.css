@@ -1,0 +1,11 @@
+/* ============================================
+   ChatPage — Full-screen chat
+   ============================================ */
+
+.chat-page {
+  height: calc(100vh - var(--header-height) - var(--space-lg) * 2);
+}
+
+.chat-page .chat-panel {
+  height: 100%;
+}

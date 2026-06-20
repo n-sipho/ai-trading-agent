@@ -1,0 +1,199 @@
+/* ============================================
+   PositionsTable Component
+   ============================================ */
+
+.positions-table-wrapper {
+  overflow: hidden;
+}
+
+.positions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.positions-header h3 {
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.positions-count {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* ---------- Desktop Table ---------- */
+.positions-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.positions-table th {
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: left;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.positions-table td {
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-base);
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  vertical-align: middle;
+}
+
+.positions-table tbody tr {
+  transition: background var(--transition-fast);
+}
+
+.positions-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.positions-table tbody tr.buy-row {
+  border-left: 3px solid var(--accent-green);
+}
+
+.positions-table tbody tr.sell-row {
+  border-left: 3px solid var(--accent-red);
+}
+
+/* Type badge */
+.type-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.type-badge.buy {
+  color: var(--accent-green);
+  background: var(--accent-green-dim);
+}
+
+.type-badge.sell {
+  color: var(--accent-red);
+  background: var(--accent-red-dim);
+}
+
+/* P/L */
+.pl-positive {
+  color: var(--accent-green);
+  font-weight: 600;
+}
+
+.pl-negative {
+  color: var(--accent-red);
+  font-weight: 600;
+}
+
+/* Close button */
+.close-position-btn {
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--accent-red-dim);
+  background: transparent;
+  color: var(--accent-red);
+  font-size: var(--font-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: var(--font-family);
+}
+
+.close-position-btn:hover {
+  background: var(--accent-red-dim);
+  border-color: var(--accent-red);
+}
+
+/* ---------- Mobile Card Layout ---------- */
+.positions-cards {
+  display: none;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+}
+
+.position-card {
+  padding: var(--space-md);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border);
+}
+
+.position-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-sm);
+}
+
+.position-card-symbol {
+  font-weight: 700;
+  font-size: var(--font-md);
+}
+
+.position-card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+}
+
+.position-card-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.position-card-field .field-label {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.position-card-field .field-value {
+  font-size: var(--font-base);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.position-card-actions {
+  margin-top: var(--space-md);
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Empty state */
+.positions-empty {
+  padding: var(--space-2xl) var(--space-lg);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--font-base);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .positions-table-desktop {
+    display: none;
+  }
+
+  .positions-cards {
+    display: flex;
+  }
+}

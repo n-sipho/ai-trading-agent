@@ -1,2 +1,22 @@
+# Python virtual environment
 .mt5_agent
+
+# Environment secrets
 .env
+
+# Legacy SMC bot (imported by backend, not tracked independently)
+mt5_smc_bot/
+
+# Node
+frontend/node_modules
+frontend/dist
+
+# Python
+backend/__pycache__
+*.pyc
+
+# OS
+.DS_Store
+
+# MCP Server
+metatrader-mcp-server

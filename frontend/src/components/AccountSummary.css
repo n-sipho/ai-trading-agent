@@ -1,0 +1,99 @@
+/* ============================================
+   AccountSummary Component
+   ============================================ */
+
+.account-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+}
+
+.account-metric {
+  padding: var(--space-lg);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: slideUp 0.5s ease both;
+}
+
+.account-metric:nth-child(1) { animation-delay: 0ms; }
+.account-metric:nth-child(2) { animation-delay: 80ms; }
+.account-metric:nth-child(3) { animation-delay: 160ms; }
+.account-metric:nth-child(4) { animation-delay: 240ms; }
+
+/* Subtle top accent line */
+.account-metric::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 3px;
+  border-radius: 0 0 3px 3px;
+}
+
+.account-metric.cyan::before  { background: var(--accent-cyan); }
+.account-metric.green::before { background: var(--accent-green); }
+.account-metric.amber::before { background: var(--accent-amber); }
+.account-metric.purple::before { background: var(--accent-purple); }
+
+.metric-label {
+  font-size: var(--font-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.metric-value {
+  font-size: var(--font-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+
+.metric-delta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: var(--space-sm);
+  font-size: var(--font-sm);
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.metric-delta.positive {
+  color: var(--accent-green);
+  background: var(--accent-green-dim);
+}
+
+.metric-delta.negative {
+  color: var(--accent-red);
+  background: var(--accent-red-dim);
+}
+
+/* Tablet: 2 columns */
+@media (max-width: 1024px) {
+  .account-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile: 1 column */
+@media (max-width: 480px) {
+  .account-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .account-metric {
+    padding: var(--space-md);
+  }
+
+  .metric-value {
+    font-size: var(--font-lg);
+  }
+}
