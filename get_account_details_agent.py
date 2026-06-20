@@ -1,10 +1,9 @@
 import asyncio
-# from datetime import datetime
 from dotenv import load_dotenv
-from mcp import ClientSession, StdioServerParameters
-from mcp.client.stdio import stdio_client
 from pydantic_ai import Agent
 from pydantic_ai.models.google import GoogleModel
+from pydantic_ai.mcp import MCPToolset
+from fastmcp.client.transports import StdioTransport
 
 load_dotenv()
 
@@ -12,42 +11,28 @@ load_dotenv()
 model = GoogleModel(
     model_name="gemma-4-31b-it",  # Target the flagship open model
 )
+
+# Connect to the MT5 MCP server using the stdio transport
+mcp_transport = StdioTransport(command="uvx", args=["--from", "mcp-metatrader5-server", "mt5mcp"])
+mcp_toolset = MCPToolset(mcp_transport)
+
 agent = Agent(
     model,
     system_prompt="""You are a trading assistant with access to MetaTrader 5.
-    You can help analyze markets, retrieve data, and execute trades safely.""",
+You can help analyze markets, retrieve data, and execute trades safely.
+
+CRITICAL INSTRUCTION: Before getting account details or checking the balance, you MUST call the `initialize` tool with the argument path="C:\\Program Files\\MetaTrader 5\\terminal64.exe" to connect to MT5. This is required before any other MT5 action.""",
+    toolsets=[mcp_toolset],
 )
 
-
 async def use_mt5_with_pydantic_ai():
-    # Start the MCP server connection
-    server_params = StdioServerParameters(
-        command="uvx", args=["--from", "mcp-metatrader5-server", "mt5mcp"]
+    # Run the agent
+    print("Running Agent and initializing MT5 connection...")
+    result = await agent.run(
+        "Initialize MT5, then get my account information and summarize the balance and equity.",
+        message_history=[],
     )
+    print(f"Agent response: {result.output}")
 
-    async with stdio_client(server_params) as (read, write):
-        async with ClientSession(read, write) as session:
-            # Initialize the session
-            await session.initialize()
-
-            # List available tools from the MCP server
-            tools_result = await session.list_tools()
-            print(f"Available tools: {[tool.name for tool in tools_result.tools]}")
-
-            # Call a tool - Initialize MT5
-            init_result = await session.call_tool(
-                "initialize",
-                arguments={"path": r"C:\Program Files\MetaTrader 5\terminal64.exe"},
-            )
-            print(f"MT5 Initialization: {init_result.content}")
-
-            # Get account info using the agent
-            result = await agent.run(
-                "Get my account information and summarize the balance and equity.",
-                message_history=[],
-            )
-            print(f"Agent response: {result.output}")
-
-
-# Run the async function
-asyncio.run(use_mt5_with_pydantic_ai())
+if __name__ == "__main__":
+    asyncio.run(use_mt5_with_pydantic_ai())
