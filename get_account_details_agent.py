@@ -46,7 +46,7 @@ async def use_mt5_with_pydantic_ai():
                 "Get my account information and summarize the balance and equity.",
                 message_history=[],
             )
-            print(f"Agent response: {result.data}")
+            print(f"Agent response: {result.output}")
 
 
 # Run the async function
